@@ -78,7 +78,6 @@ namespace triangl
             pic1.Size = new Size(200, 200);
             pic1.SizeMode = PictureBoxSizeMode.Zoom;
             pic1.BorderStyle = BorderStyle.FixedSingle;
-            Controls.Add(pic1);
 
             Controls.Add(list_);
             Controls.Add(btn);
