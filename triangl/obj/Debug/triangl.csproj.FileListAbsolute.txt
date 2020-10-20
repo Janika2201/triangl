@@ -1,0 +1,11 @@
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.Form1.resources
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.Form2.resources
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.Properties.Resources.resources
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\triangl\triangl\bin\Debug\triangl.exe.config
+C:\Users\Admin\source\repos\triangl\triangl\bin\Debug\triangl.exe
+C:\Users\Admin\source\repos\triangl\triangl\bin\Debug\triangl.pdb
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.exe
+C:\Users\Admin\source\repos\triangl\triangl\obj\Debug\triangl.pdb
