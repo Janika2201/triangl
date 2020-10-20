@@ -146,17 +146,17 @@ namespace triangl
             }
             return image;
         }
-        public double mediana()
-        {
-            double m = 0;
-            m = Math.Round((Math.Sqrt(2 * b * b + 2 * c * c - a * a) / 2), 2);
-            return m;
-        }
         public double bisectrisa()
         {
             double bisectrisa;
             bisectrisa = Math.Round(Math.Sqrt(b * c * ((b + c) * (b + c) - a * a)) / (b + c), 2);
             return bisectrisa;
+        }
+        public double mediana()
+        {
+            double m = 0;
+            m = Math.Round((Math.Sqrt(2 * b * b + 2 * c * c - a * a) / 2), 2);
+            return m;
         }
     }
 }
