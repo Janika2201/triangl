@@ -66,6 +66,10 @@ namespace triangl
             p = a + b + c; // вычисление
             return p; // возврат
         }
+        public double HalfPerimeter() // полупериметр
+        {
+            return Perimeter() / 2;
+        }
         public double Surface() // аналогично периметру
         {
             double s = 0;
@@ -157,6 +161,12 @@ namespace triangl
             double m = 0;
             m = Math.Round((Math.Sqrt(2 * b * b + 2 * c * c - a * a) / 2), 2);
             return m;
+        }
+        public double sinA()
+        {
+            double sinusA = 0;
+            sinusA = Math.Round((a / c), 2);
+            return sinusA;
         }
     }
 }
