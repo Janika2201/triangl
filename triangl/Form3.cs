@@ -14,27 +14,33 @@ namespace triangl
 {
     public partial class Form3 : Form
     {
-        ListBox list_;
+        ListBox list_box;
         Button btn;
         Label lblA, lblB, lblC, lblH;
         TextBox txtA, txtB, txtC, txtH;
-        PictureBox pic1, pic2, pic3;
+        PictureBox pic3;
         RadioButton radio1, radio2;
+        Graphics gp;
+        Pen p = new Pen(Brushes.Red, 2);
+        double a, b, c, h;
+
         public Form3()
         {
+
+
             this.Height = 500;
-            this.Width = 700;
+            this.Width = 800;
             this.Text = "Windows Form3 Triangle";
             this.BackColor = Color.BlanchedAlmond;
             this.Icon = new Icon("triangle.ico");
-            list_ = new ListBox();
-            list_.Location = new Point(10, 10);
-            list_.Size = new Size(210, 170);
-            list_.Items.Add("Таблица с значением");
-            list_.BackColor = Color.Tan;
+            list_box = new ListBox();
+            list_box.Location = new Point(10, 10);
+            list_box.Size = new Size(350, 160);
+            list_box.Items.Add("Таблица с значением");
+            list_box.BackColor = Color.Tan;
 
             btn = new Button();//кнопка запуск
-            btn.Location = new Point(100, 350);
+            btn.Location = new Point(100, 310);
             btn.Size = new Size(110, 40);
             btn.Click += Btn_Click;
             btn.Text = "Запуск";
@@ -71,7 +77,7 @@ namespace triangl
             lblH.BackColor = Color.GreenYellow;
 
             txtA = new TextBox();//txt ящик
-            txtA.Size = new Size(100,30);
+            txtA.Size = new Size(100, 30);
             txtA.Location = new Point(130, 180);
             txtA.BackColor = Color.SeaShell;
 
@@ -87,37 +93,34 @@ namespace triangl
             txtH = new TextBox();//txt ящик
             txtH.Location = new Point(130, 270);
             txtH.BackColor = Color.SeaShell;
-            
-            pic1 = new PictureBox();//PixBox
-            pic1.Image = Image.FromFile("tri.png");
-            pic1.Location = new Point(340, 220);
-            pic1.Size = new Size(200, 200);
-            pic1.SizeMode = PictureBoxSizeMode.Zoom;
-            pic1.BorderStyle = BorderStyle.FixedSingle;
-
-
-            pic2 = new PictureBox();//PixBox
-            pic2.Image = Image.FromFile("trian.gif");
-            pic2.Location = new Point(250, 50);
-            pic2.Size = new Size(100, 100);
-            pic2.SizeMode = PictureBoxSizeMode.Zoom;
-            pic2.BorderStyle = BorderStyle.FixedSingle;
 
             pic3 = new PictureBox();//PixBox
             pic3.Image = Image.FromFile("tro.gif");
-            pic3.Location = new Point(410, 10);
+            pic3.Location = new Point(410, 220);
             pic3.Size = new Size(200, 200);
             pic3.SizeMode = PictureBoxSizeMode.Zoom;
             pic3.BorderStyle = BorderStyle.FixedSingle;
 
 
-            radio1 = new RadioButton();//кнопка запуск
-            radio1.Location = new Point(40, 400);
-            radio1.Size = new Size(110, 40);
-            radio1.Click += Radio1_Click; ;
-            radio1.Text = "a, b, c";
-            radio1.BackColor = Color.LightPink;
-            radio1.ForeColor = Color.Red;
+            Panel panel1 = new Panel();//кнопка запуск
+            panel1.Location = new Point(410, 20);
+            panel1.Size = new Size(195, 200);
+            panel1.BackColor = Color.WhiteSmoke;
+
+            gp = panel1.CreateGraphics();
+
+
+            radio1 = new RadioButton();
+            radio1.Location = new Point(10, 380);
+            radio1.Size = new Size(200,20);
+            radio1.Text = "(a,b,c,h)Высота есть";
+            radio1.CheckedChanged += Radio1_CheckedChanged;
+
+            radio2 = new RadioButton();
+            radio2.Location = new Point(10, 400);
+            radio2.Size = new Size(200, 20);
+            radio2.Text = "(a,b,c) Найти высоту";
+            radio2.CheckedChanged += Radio2_CheckedChanged;
 
             MainMenu menu = new MainMenu();
             BackColor = Color.White;
@@ -135,7 +138,7 @@ namespace triangl
 
 
 
-            Controls.Add(list_);
+            Controls.Add(list_box);
             Controls.Add(btn);
             Controls.Add(lblA);
             Controls.Add(lblB);
@@ -145,20 +148,23 @@ namespace triangl
             Controls.Add(txtB);
             Controls.Add(txtC);
             Controls.Add(txtH);
-            Controls.Add(pic1);
-            Controls.Add(pic2);
             Controls.Add(pic3);
             Controls.Add(radio1);
+            Controls.Add(radio2);
+            Controls.Add(panel1);
 
         }
 
-        private void Radio1_Click(object sender, EventArgs e)
+        private void Radio2_CheckedChanged(object sender, EventArgs e)
         {
-            txtC.Visible = true;
-            lblC.Visible = true;
-            lblB.Text = "Сторона B";
-            if (!radio1.Checked)
-                radio2.Checked = true;
+            lblH.Visible = false;
+            txtH.Visible = false;
+        }
+
+        private void Radio1_CheckedChanged(object sender, EventArgs e)
+        {
+            lblH.Visible = true;
+            txtH.Visible = true;
         }
 
         private void item1_website(object sender, EventArgs e)
@@ -189,10 +195,19 @@ namespace triangl
         }
 
         private void Btn_Click(object sender, EventArgs e)
+        {
+            btn.BackColor = Color.Transparent;
+            list_box.Items.Clear();
+
+            if (radio2.Checked)
             {
-                btn.BackColor = Color.Transparent;
-                list_.Items.Clear();
-                double a, b, c, h;
+                a = Convert.ToDouble(txtA.Text);
+                b = Convert.ToDouble(txtB.Text);
+                c = Convert.ToDouble(txtC.Text);
+                h = 0;
+            }
+            else 
+            {
                 if (txtA.Text == "" || txtB.Text == "" || txtC.Text == "" || txtH.Text == "")
                 {
                     a = 0;
@@ -207,20 +222,62 @@ namespace triangl
                     c = Convert.ToDouble(txtC.Text);
                     h = Convert.ToDouble(txtH.Text);
                 }
+              
+            }
+            
+
                 Triangle triangle = new Triangle(a, b, c, h);
-                list_.Items.Add("Сторона а:" + " " + triangle.outputA());
-                list_.Items.Add("Сторона b:" + " " + triangle.outputB());
-                list_.Items.Add("Сторона c:" + " " + triangle.outputC());
-                list_.Items.Add("Высота:" + " " + triangle.outputH());
-                list_.Items.Add("Периметр:" + " " + Convert.ToString(triangle.Perimeter()));
-                list_.Items.Add("ПолуПериметр:" + " " + Convert.ToString(triangle.HalfPerimeter()));
-                list_.Items.Add("Площадь:" + " " + Convert.ToString(triangle.Surface()));
-                if (triangle.ExistTriangle) { list_.Items.Add("Существует?  Существует"); }
-                else list_.Items.Add("Существует?  Не существует");
-                list_.Items.Add("Спецификатор:" + " " + triangle.TypeOfTriangle());
-                list_.Items.Add("Медиана:" + " " + Convert.ToString(triangle.mediana()));
-                list_.Items.Add("Биссектриса:" + " " + Convert.ToString(triangle.bisectrisa()));
-                list_.Items.Add("Cинус угла А:" + " " + Convert.ToString(triangle.sinA()));
+                list_box.Items.Add("Сторона а:" + " " + triangle.outputA());
+                list_box.Items.Add("Сторона b:" + " " + triangle.outputB());
+                list_box.Items.Add("Сторона c:" + " " + triangle.outputC());
+                if(triangle.outputH() == "0")
+                {
+                    list_box.Items.Add("Высота:" + " " + triangle.HeightOfTriangle());
+                }
+                else
+                {
+                    list_box.Items.Add("Высота:" + " " + triangle.outputH());
+                }
+                list_box.Items.Add("Периметр:" + " " + Convert.ToString(triangle.Perimeter()));
+                list_box.Items.Add("ПолуПериметр:" + " " + Convert.ToString(triangle.HalfPerimeter()));
+                list_box.Items.Add("Площадь:" + " " + Convert.ToString(triangle.Surface()));
+                if (triangle.ExistTriangle) { list_box.Items.Add("Существует?  Существует"); }
+                else list_box.Items.Add("Существует?  Не существует");
+                list_box.Items.Add("Спецификатор:" + " " + triangle.TypeOfTriangle());
+                list_box.Items.Add("Медиана:" + " " + Convert.ToString(triangle.mediana()));
+                list_box.Items.Add("Биссектриса:" + " " + Convert.ToString(triangle.bisectrisa()));
+                list_box.Items.Add("Cинус угла А:" + " " + Convert.ToString(triangle.sinA()));
+                if (triangle.TypeOfTriangle() == "остроугольный")
+                {
+                    Point p1 = new Point(60, 110);
+                    Point p2 = new Point(150, 110);
+                    Point p3 = new Point(100, 20);
+
+                    gp.DrawLine(p, p1, p2); // Рисуем Основание треугольника
+                    gp.DrawLine(p, p2, p3); // Рисуем Вторую сторону тругольника
+                    gp.DrawLine(p, p3, p1); // Рисуем третью сторону тругольника
+                }
+                else if (triangle.TypeOfTriangle() == "тупоугольный")
+                {
+                    Point p1 = new Point(100, 110);
+                    Point p2 = new Point(150, 110);
+                    Point p3 = new Point(75, 30);
+
+                    gp.DrawLine(p, p1, p2); // Рисуем Основание треугольника
+                    gp.DrawLine(p, p2, p3); // Рисуем Вторую сторону тругольника
+                    gp.DrawLine(p, p3, p1); // Рисуем третью сторону тругольника
+                }
+                else if (triangle.TypeOfTriangle() == "прямоугольный")
+                {
+                    Point p1 = new Point(70, 160);
+                    Point p2 = new Point(157, 30);
+                    Point p3 = new Point(70, 30);
+
+                    gp.DrawLine(p, p1, p2); // Рисуем Основание треугольника
+                    gp.DrawLine(p, p2, p3); // Рисуем Вторую сторону тругольника
+                    gp.DrawLine(p, p3, p1); // Рисуем третью сторону тругольника
+                }
+
+            }
         }
     }
- }
