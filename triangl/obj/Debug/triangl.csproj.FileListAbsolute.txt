@@ -21,3 +21,4 @@ C:\Users\opilane\Source\Repos\triangl\triangl\obj\Debug\triangl.exe
 C:\Users\opilane\Source\Repos\triangl\triangl\obj\Debug\triangl.pdb
 C:\Users\opilane\source\repos\triangl\triangl\obj\Debug\triangl.csprojAssemblyReference.cache
 C:\Users\opilane\source\repos\triangl\triangl\obj\Debug\triangl.Form3.resources
+C:\Users\Admin\Source\Repos\triangl\triangl\obj\Debug\triangl.Form3.resources
