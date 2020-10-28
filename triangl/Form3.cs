@@ -73,7 +73,7 @@ namespace triangl
             lblH = new Label();//label Стороны H
             lblH.Size = new Size(70, 30);
             lblH.Location = new Point(50, 270);
-            lblH.Text = "Сторона H";
+            lblH.Text = "Высота H";
             lblH.ForeColor = Color.Black;
             lblH.BackColor = Color.GreenYellow;
 
@@ -170,14 +170,11 @@ namespace triangl
             MainMenu menu = new MainMenu();
             BackColor = Color.White;
             ForeColor = Color.Black;
-            MenuItem item1 = new MenuItem("File");//файл
-            item1.MenuItems.Add("Edit");
-            item1.MenuItems.Add("Exit", new EventHandler(exit));//выход
+            
             MenuItem my = new MenuItem("My");//мое меню
             my.MenuItems.Add("Random color", new EventHandler(colors1));//рандомный цвет фона
             my.MenuItems.Add("Restarting the program", new EventHandler(item1_restart));//перезагрузка программы
-            my.MenuItems.Add("Website MY", new EventHandler(item1_website));//ссылка на мой сайт 
-            menu.MenuItems.Add(item1);
+            my.MenuItems.Add("Website triangle", new EventHandler(item1_website));//ссылка на мой сайт 
             menu.MenuItems.Add(my);
             this.Menu = menu;
 
@@ -252,7 +249,7 @@ namespace triangl
 
         private void item1_website(object sender, EventArgs e)
         {
-            Process.Start("https://github.com/Janika2201/triangl");
+            Process.Start("http://www.treugolniki.ru/");
         }
 
         private void item1_restart(object sender, EventArgs e)
@@ -319,7 +316,14 @@ namespace triangl
                 }
                 else
                 {
-                    list_box.Items.Add("Высота:" + " " + triangle.outputH());
+                    if(triangle.outputH() != Convert.ToString(triangle.HeightOfTriangle()))
+                    {
+                    list_box.Items.Add("Высота:" + " " + Convert.ToDouble(txtH.Text) + "(Верная высота: " + triangle.HeightOfTriangle() + ")");
+                    }
+                    else
+                    {
+                    list_box.Items.Add("Высота: " + " " + triangle.outputH());
+                    }
                 }
                 list_box.Items.Add("Периметр:" + " " + Convert.ToString(triangle.Perimeter()));
                 list_box.Items.Add("ПолуПериметр:" + " " + Convert.ToString(triangle.HalfPerimeter()));
@@ -330,6 +334,7 @@ namespace triangl
                 list_box.Items.Add("Медиана:" + " " + Convert.ToString(triangle.mediana()));
                 list_box.Items.Add("Биссектриса:" + " " + Convert.ToString(triangle.bisectrisa()));
                 list_box.Items.Add("Cинус угла А:" + " " + Convert.ToString(triangle.sinA()));
+                gp.Clear(Color.White);
                 if (triangle.TypeOfTriangle() == "остроугольный")
                 {
                     Point p1 = new Point(60, 110);
